@@ -1,7 +1,8 @@
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
-import { updateTrainer, signOut } from '@/app/actions'
+import { updateTrainer } from '@/app/actions'
+import { AdminNav } from '@/components/Nav'
 
 const FILTERS = ['pending', 'info_requested', 'approved', 'rejected', 'suspended', 'inactive']
 const LEVELS = ['Facilitator', 'Level 1', 'Level 2', 'Senior Trainer']
@@ -20,13 +21,7 @@ export default async function AdminPage({ searchParams }: { searchParams: { stat
 
   return (
     <main className="page">
-      <header className="topbar">
-        <strong className="brand">Back Office · Trainers</strong>
-        <nav>
-          <Link href="/dashboard">My dashboard</Link>
-          <form action={signOut}><button className="link">Sign out</button></form>
-        </nav>
-      </header>
+      <AdminNav />
 
       <div className="tabs">
         {FILTERS.map((f) => (
