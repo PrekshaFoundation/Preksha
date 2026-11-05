@@ -19,7 +19,7 @@ export default async function EditActivity({
   const { data: rows } = await supabase
     .from('activity_photos').select('id, storage_path').eq('activity_id', activity.id).order('sort_order')
   const paths: string[] = (rows ?? []).map((r) => r.storage_path)
-  const urlFor = new Map<string, string>()
+    const urlFor = new Map<string, string>()
   if (paths.length) {
     const { data: signed } = await supabase.storage.from('activity-photos').createSignedUrls(paths, 3600)
     signed?.forEach((x) => { if (x.path && x.signedUrl) urlFor.set(x.path, x.signedUrl) })
