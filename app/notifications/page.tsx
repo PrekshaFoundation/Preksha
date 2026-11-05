@@ -17,7 +17,7 @@ export default async function NotificationsPage() {
   const urls = new Map<string, string>()
   if (paths.length) {
     const { data } = await supabase.storage.from('content-files').createSignedUrls(paths, 3600)
-    data?.forEach((d) => { if (d.path) urls.set(d.path, d.signedUrl) })
+    data?.forEach((d) => { if (d.path && d.signedUrl) urls.set(d.path, d.signedUrl) })
   }
 
   return (

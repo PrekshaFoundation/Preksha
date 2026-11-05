@@ -28,7 +28,7 @@ export default async function AdminActivities({ searchParams }: { searchParams: 
   const urls = new Map<string, string>()
   if (paths.length) {
     const { data } = await supabase.storage.from('activity-photos').createSignedUrls(paths, 3600)
-    data?.forEach((d) => { if (d.path) urls.set(d.path, d.signedUrl) })
+    data?.forEach((d) => { if (d.path && d.signedUrl) urls.set(d.path, d.signedUrl) })
   }
 
   return (

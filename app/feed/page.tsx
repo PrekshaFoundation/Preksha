@@ -43,11 +43,11 @@ export default async function Feed({ searchParams }: { searchParams: SP }) {
   const urls = new Map<string, string>()
   if (activityPaths.length) {
     const { data } = await supabase.storage.from('activity-photos').createSignedUrls(activityPaths, 3600)
-    data?.forEach((d) => { if (d.path) urls.set(d.path, d.signedUrl) })
+    data?.forEach((d) => { if (d.path && d.signedUrl) urls.set(d.path, d.signedUrl) })
   }
   if (profilePaths.length) {
     const { data } = await supabase.storage.from('trainer-photos').createSignedUrls(profilePaths, 3600)
-    data?.forEach((d) => { if (d.path) urls.set(d.path, d.signedUrl) })
+    data?.forEach((d) => { if (d.path && d.signedUrl) urls.set(d.path, d.signedUrl) })
   }
 
   return (
